@@ -1,0 +1,20 @@
+baseurl: http://yjc.me/
+disablePathToLower: true
+languageCode: en-us
+title: 简而言之 / Just yang's words.
+
+paginate: 20
+paginatePath: 'page'
+
+params:
+  analytics: 'UA-1080811-15'  
+  disqus: 'yjc'
+  copyright: "Copyright &copy; 2015 Jesse Yang."
+  author: 杨建超
+  author_en: Jesse Yang
+  lang: zh  # default language of your site
+  languages:
+    en: English
+    zh: 中文
+...
+...
