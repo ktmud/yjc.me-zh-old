@@ -6,6 +6,10 @@ title: 简而言之 / Just yang's words.
 paginate: 40
 paginatePath: 'page'
 
+permalinks:
+  landing: /:slug/
+  blog: /:slug/
+
 params:
   analytics: 'UA-1080811-15'  
   disqus: 'yjc'
