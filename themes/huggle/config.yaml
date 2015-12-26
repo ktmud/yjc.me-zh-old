@@ -1,0 +1,27 @@
+---
+layoutdir: "template/layouts"
+taxonomies:
+  tag: tags
+  category: categories
+permalinks:
+  landing: /:slug
+  blog: /:year/:month/:slug/
+baseurl: http://ktmud.github.io/huggle/
+title: Huggle.
+
+zh:
+  title: 全部文章
+en:
+  title: All Posts
+
+params:
+  analytics: 'UA-1080811-19'  
+  disqus: 'huggle'
+  copyright: "Copyright &copy; 2014 Jesse Yang."
+  author: Jesse Yang
+  lang: en  # default language of your site
+  languages:
+    en: English
+    zh: 中文
+
+...

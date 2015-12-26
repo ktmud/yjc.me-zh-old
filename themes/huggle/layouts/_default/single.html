@@ -1,0 +1,25 @@
+{{ partial "layouts/default.begin.html" . }}
+
+<div class="row">
+  <div class="col-md-3 col-md-push-9 aside hidden-print">
+    {{ partial "article-sidebar.html" . }}
+  </div>
+  <div class="col-md-9 col-md-pull-3">
+    <div class="heading">
+      <h1>{{ .Title }}</h1>
+      {{ if isset .Params "subtitle" }}
+        <p class="subtitle">{{ index .Params "subtitle" }}</p>
+      {{ end }}
+      <div class="meta">
+        {{ partial "article-meta.html" . }}
+      </div>
+    </div>
+    <article class="readable">
+      {{ .Content }}
+    </article>
+    {{ partial "disqus.html" . }}
+    {{ partial "footer.html" . }}
+  </div>
+</div>
+
+{{ partial "layouts/default.end.html" . }}
