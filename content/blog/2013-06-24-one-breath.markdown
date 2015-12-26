@@ -4,7 +4,7 @@ categories:
 comments: true
 date: 2013-06-24T00:00:00Z
 title: 憋一口气
-url: /2013/06/24/one-breath/
+url: /one-breath/
 ---
 
 <!--最近突然发现身边好多朋友，都走了一些不那么循规蹈矩的路。-->

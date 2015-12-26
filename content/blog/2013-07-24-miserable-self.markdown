@@ -4,7 +4,7 @@ categories:
 comments: true
 date: 2013-07-24T00:00:00Z
 title: 更凄惨的自己
-url: /2013/07/24/miserable-self/
+url: /miserable-self/
 ---
 
 很多人心底都有一个比真实情况要凄惨的自己。

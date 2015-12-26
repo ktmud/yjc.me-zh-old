@@ -5,7 +5,7 @@ categories:
 comments: true
 date: 2013-06-09T00:00:00Z
 title: 激动的大众
-url: /2013/06/09/emotional-public/
+url: /emotional-public/
 ---
 
 《炎黄春秋》上登的道歉广告，算是第一次有人在公开场合就文革期间自己的行为向具体的受害者道歉。
