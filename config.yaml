@@ -3,7 +3,7 @@ disablePathToLower: true
 languageCode: en-us
 title: 简而言之 / Just yang's words.
 
-paginate: 20
+paginate: 40
 paginatePath: 'page'
 
 params:
