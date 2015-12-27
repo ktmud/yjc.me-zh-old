@@ -105,13 +105,13 @@ gulp.task('live', ['watch'], function() {
 })
 
 gulp.task('compress-css', ['css'], function() {
-  return gulp.src(dist.assets + '/')
-    .pipe(plugins.minifyCss())
+  return gulp.src(dist.assets + '/**/*.css')
+    .pipe(plugins.cssnano())
     .pipe(gulp.dest(dist.assets))
 })
 
 gulp.task('compress-js', ['js'], function() {
-  return gulp.src(dist.assets)
+  return gulp.src(dist.assets + '/**/*.js')
     .pipe(plugins.uglify())
     .pipe(gulp.dest(dist.assets))
 })
