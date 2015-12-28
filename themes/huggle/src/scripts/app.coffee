@@ -1,3 +1,5 @@
+# override bootstrap scrollspy to fix the ID bug
+require('./scrollspy')
 
 # Make external link open in new window
 $(document.links).filter ->

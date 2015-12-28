@@ -82,8 +82,8 @@ gulp.task('js', ['bower-js'], function buildJS() {
 
 gulp.task('watch', ['css', 'js'], function() {
   gulp.watch(src.bower, ['bower-css', 'bower-js', 'bower-other'])
-  plugins.watch({ glob: src.styles, name: 'styles' }, ['css'])
-  plugins.watch({ glob: src.scripts, name: 'scripts' }, ['js'])
+  gulp.watch(src.styles, ['css'])
+  gulp.watch(src.scripts, ['js'])
 })
 //
 // live reload can emit changes only when at lease one build is done
