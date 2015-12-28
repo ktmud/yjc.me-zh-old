@@ -1,34 +1,36 @@
 {{ partial "layouts/default.begin.html" . }}
 
-<div class="row">
-  <div class="col-md-3 col-md-push-9 aside hidden-print">
+<body>
+  {{ partial "header.html" . }}
+  <div class="container">
+  <div class="row">
+    <div class="col-md-3 col-md-push-9 aside hidden-print">
+    </div>
+    <div class="col-md-9 col-md-pull-3">
+      {{ range .Data.Pages.GroupByDate "2006" }}
+      <section class="archive">
+        <h2 class="archive-year">{{ .Key }}</h2>
+        <ul class="archive-posts">
+          {{ range .Pages }}
+          <li>
+            <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+            <time pubdate datetime="{{ .PublishDate }}">{{ .Date.Format "Jan 2" }}</time>
+            <span class="archive-categories">
+              posted in
+              {{ range .Params.categories }}
+                <a href="/categories/{{ . | urlize }}">{{ . }}</a>
+              {{ end }}
+            </span>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+      {{ end }}
+
+      {{ template "_internal/pagination.html" . }}
+
+      {{ partial "footer.html" . }}
+    </div>
   </div>
-  <div class="col-md-9 col-md-pull-3">
-		{{ range .Data.Pages.GroupByDate "2006" }}
-    <section class="archive">
-      <h2 class="archive-year">{{ .Key }}</h2>
-      <ul class="archive-posts">
-        {{ range .Pages }}
-        <li>
-          <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
-          <time pubdate datetime="{{ .PublishDate }}">{{ .Date.Format "Jan 2" }}</time>
-          <span class="archive-categories">
-            posted in
-            {{ range .Params.categories }}
-              <a href="/categories/{{ . | urlize }}">{{ . }}</a>
-            {{ end }}
-          </span>
-        </li>
-        {{ end }}
-      </ul>
-    </section>
-		{{ end }}
-
-		{{ template "_internal/pagination.html" . }}
-
-    {{ partial "footer.html" . }}
-  </div>
-</div>
-
-{{ partial "layouts/default.end.html" . }}
-
+  </div><!-- .container -->
+</body>

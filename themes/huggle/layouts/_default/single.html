@@ -20,20 +20,23 @@
       <article class="readable" id="main-article">
         {{ .Content }}
       </article>
-      <div class="article-nav">
+      <div class="row article-nav">
         {{ if .Prev }}
-          <a class="previous" href="{{.Prev.Permalink}}"> {{.Prev.Title}}</a>
+          <div class="col-sm-6 text-left">
+            &laquo;
+            <a class="previous" href="{{.Prev.Permalink}}"> {{.Prev.Title}}</a>
+          </div>
         {{ end }}
         {{ if .Next }}
-          <a class="next" href="{{.Next.Permalink}}"> {{.Next.Title}}</a>
+          <div class="col-sm-6 text-right">
+            <a class="next" href="{{.Next.Permalink}}"> {{.Next.Title}}</a>
+            &raquo;
+          </div>
         {{ end }}
       </div>
-      <hr>
       {{ partial "disqus.html" . }}
       {{ partial "footer.html" . }}
     </div>
   </div>
   </div><!-- .container -->
 </body>
-
-{{ partial "layouts/default.end.html" . }}

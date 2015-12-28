@@ -3,14 +3,14 @@
 {{ if (eq $lang "en") }}
   <ul class="list-inline">
     <li>
-      By <strong class="author">{{ or .Params.author .Site.Params.author_en .Site.Params.author }}</strong>
+      by <strong class="author">{{ or .params.author .site.params.author_en .site.params.author }}</strong>
     </li>
     <li>
       <span class="icon-clock"></span>
-      <time pubdate class="pubdate" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+      <time pubdate class="pubdate" datetime="{{ .date }}">{{ .date.format "2006-01-02" }}</time>
     </li>
-    {{ if and (isset .Params "commentable") (not .Params.commentable) }}
-    {{ else if .Site.Params.disqus }}
+    {{ if and (isset .params "commentable") (not .params.commentable) }}
+    {{ else if .site.params.disqus }}
       <li><a href="#disqus_thread"></a></li>
     {{ end }}
   </ul>
@@ -21,7 +21,7 @@
     </li>
     <li>
       <span class="icon-clock"></span>
-      <time pubdate class="pubdate" datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+      <time pubdate class="pubdate" datetime="{{ .Date }}">{{ or .Params.pubdate (.Date.Format "2006-01-02") }}</time>
     </li>
     {{ if and (isset .Params "commentable") (not .Params.commentable) }}
     {{ else if .Site.Params.disqus }}

@@ -1,1 +1,207 @@
-!function t(e,s,o){function r(n,l){if(!s[n]){if(!e[n]){var c="function"==typeof require&&require;if(!l&&c)return c(n,!0);if(i)return i(n,!0);var a=new Error("Cannot find module '"+n+"'");throw a.code="MODULE_NOT_FOUND",a}var h=s[n]={exports:{}};e[n][0].call(h.exports,function(t){var s=e[n][1][t];return r(s?s:t)},h,h.exports,t,e,s,o)}return s[n].exports}for(var i="function"==typeof require&&require,n=0;n<o.length;n++)r(o[n]);return r}({1:[function(t,e,s){t("./scrollspy"),$(document.links).filter(function(){return this.href=(this.getAttribute("href")||"").replace(/([^:])\/{2,}/g,"$1/"),this.hostname!==window.location.hostname}).attr("target","_blank"),$("pre > code").each(function(){return Prism.highlightElement(this)}),$("#TableOfContents > ul ul").addClass("nav"),$("#toc").affix({offset:{top:function(){return this.top=$("#toc").offset().top-20}}}),$("body").scrollspy({target:"#TableOfContents",offset:20}),console.log("Give me a Huggle.")},{"./scrollspy":2}],2:[function(t,e,s){+function(t){"use strict";function e(s,o){this.$body=t(document.body),this.$scrollElement=t(t(s).is(document.body)?window:s),this.options=t.extend({},e.DEFAULTS,o),this.selector=(this.options.target||"")+" .nav li > a",this.offsets=[],this.targets=[],this.activeTarget=null,this.scrollHeight=0,this.$scrollElement.on("scroll.bs.scrollspy",t.proxy(this.process,this)),this.refresh(),this.process()}function s(s){return this.each(function(){var o=t(this),r=o.data("bs.scrollspy"),i="object"==typeof s&&s;r||o.data("bs.scrollspy",r=new e(this,i)),"string"==typeof s&&r[s]()})}e.VERSION="3.3.6",e.DEFAULTS={offset:10},e.prototype.getScrollHeight=function(){return this.$scrollElement[0].scrollHeight||Math.max(this.$body[0].scrollHeight,document.documentElement.scrollHeight)},e.prototype.refresh=function(){var e=this,s="offset",o=0;this.offsets=[],this.targets=[],this.scrollHeight=this.getScrollHeight(),t.isWindow(this.$scrollElement[0])||(s="position",o=this.$scrollElement.scrollTop()),this.$body.find(this.selector).map(function(){var e=t(this),r=e.data("target")||e.attr("href"),i=/^#./.test(r)&&t(r.replace(":","\\:"));return i&&i.length&&i.is(":visible")&&[[i[s]().top+o,r]]||null}).sort(function(t,e){return t[0]-e[0]}).each(function(){e.offsets.push(this[0]),e.targets.push(this[1])})},e.prototype.process=function(){var t,e=this.$scrollElement.scrollTop()+this.options.offset,s=this.getScrollHeight(),o=this.options.offset+s-this.$scrollElement.height(),r=this.offsets,i=this.targets,n=this.activeTarget;if(this.scrollHeight!=s&&this.refresh(),e>=o)return n!=(t=i[i.length-1])&&this.activate(t);if(n&&e<r[0])return this.activeTarget=null,this.clear();for(t=r.length;t--;)n!=i[t]&&e>=r[t]&&(void 0===r[t+1]||e<r[t+1])&&this.activate(i[t])},e.prototype.activate=function(e){this.activeTarget=e,this.clear();var s=this.selector+'[data-target="'+e+'"],'+this.selector+'[href="'+e+'"]',o=t(s).parents("li").addClass("active");o.parent(".dropdown-menu").length&&(o=o.closest("li.dropdown").addClass("active")),o.trigger("activate.bs.scrollspy")},e.prototype.clear=function(){t(this.selector).parentsUntil(this.options.target,".active").removeClass("active")};var o=t.fn.scrollspy;t.fn.scrollspy=s,t.fn.scrollspy.Constructor=e,t.fn.scrollspy.noConflict=function(){return t.fn.scrollspy=o,this},t(window).on("load.bs.scrollspy.data-api",function(){t('[data-spy="scroll"]').each(function(){var e=t(this);s.call(e,e.data())})})}(jQuery)},{}]},{},[1]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require('./scrollspy');
+
+$(document.links).filter(function() {
+  this.href = (this.getAttribute('href') || '').replace(/([^:])\/{2,}/g, '$1/');
+  return this.hostname !== window.location.hostname;
+}).attr('target', '_blank');
+
+$('pre > code').each(function() {
+  return Prism.highlightElement(this);
+});
+
+$('#TableOfContents > ul ul').addClass('nav');
+
+$('#toc').affix({
+  offset: {
+    top: function() {
+      return this.top = $('#toc').offset().top - 20;
+    }
+  }
+});
+
+$('body').scrollspy({
+  target: '#TableOfContents',
+  offset: 20
+});
+
+console.log('Give me a Huggle.');
+
+},{"./scrollspy":2}],2:[function(require,module,exports){
+/* ========================================================================
+ * Bootstrap: scrollspy.js v3.3.6
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // SCROLLSPY CLASS DEFINITION
+  // ==========================
+
+  function ScrollSpy(element, options) {
+    this.$body          = $(document.body)
+    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+    this.selector       = (this.options.target || '') + ' .nav li > a'
+    this.offsets        = []
+    this.targets        = []
+    this.activeTarget   = null
+    this.scrollHeight   = 0
+
+    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+    this.refresh()
+    this.process()
+  }
+
+  ScrollSpy.VERSION  = '3.3.6'
+
+  ScrollSpy.DEFAULTS = {
+    offset: 10
+  }
+
+  ScrollSpy.prototype.getScrollHeight = function () {
+    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+  }
+
+  ScrollSpy.prototype.refresh = function () {
+    var that          = this
+    var offsetMethod  = 'offset'
+    var offsetBase    = 0
+
+    this.offsets      = []
+    this.targets      = []
+    this.scrollHeight = this.getScrollHeight()
+
+    if (!$.isWindow(this.$scrollElement[0])) {
+      offsetMethod = 'position'
+      offsetBase   = this.$scrollElement.scrollTop()
+    }
+
+    this.$body
+      .find(this.selector)
+      .map(function () {
+        var $el   = $(this)
+        var href  = $el.data('target') || $el.attr('href')
+        var $href = /^#./.test(href) && $(href.replace(':', '\\:'))
+
+        return ($href
+          && $href.length
+          && $href.is(':visible')
+          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+      })
+      .sort(function (a, b) { return a[0] - b[0] })
+      .each(function () {
+        that.offsets.push(this[0])
+        that.targets.push(this[1])
+      })
+  }
+
+  ScrollSpy.prototype.process = function () {
+    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+    var scrollHeight = this.getScrollHeight()
+    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+    var offsets      = this.offsets
+    var targets      = this.targets
+    var activeTarget = this.activeTarget
+    var i
+
+    if (this.scrollHeight != scrollHeight) {
+      this.refresh()
+    }
+
+    if (scrollTop >= maxScroll) {
+      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+    }
+
+    if (activeTarget && scrollTop < offsets[0]) {
+      this.activeTarget = null
+      return this.clear()
+    }
+
+    for (i = offsets.length; i--;) {
+      activeTarget != targets[i]
+        && scrollTop >= offsets[i]
+        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
+        && this.activate(targets[i])
+    }
+  }
+
+  ScrollSpy.prototype.activate = function (target) {
+    this.activeTarget = target
+
+    this.clear()
+
+    var selector = this.selector +
+      '[data-target="' + target + '"],' +
+      this.selector + '[href="' + target + '"]'
+
+    var active = $(selector)
+      .parents('li')
+      .addClass('active')
+
+    if (active.parent('.dropdown-menu').length) {
+      active = active
+        .closest('li.dropdown')
+        .addClass('active')
+    }
+
+    active.trigger('activate.bs.scrollspy')
+  }
+
+  ScrollSpy.prototype.clear = function () {
+    $(this.selector)
+      .parentsUntil(this.options.target, '.active')
+      .removeClass('active')
+  }
+
+
+  // SCROLLSPY PLUGIN DEFINITION
+  // ===========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.scrollspy')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.scrollspy
+
+  $.fn.scrollspy             = Plugin
+  $.fn.scrollspy.Constructor = ScrollSpy
+
+
+  // SCROLLSPY NO CONFLICT
+  // =====================
+
+  $.fn.scrollspy.noConflict = function () {
+    $.fn.scrollspy = old
+    return this
+  }
+
+
+  // SCROLLSPY DATA-API
+  // ==================
+
+  $(window).on('load.bs.scrollspy.data-api', function () {
+    $('[data-spy="scroll"]').each(function () {
+      var $spy = $(this)
+      Plugin.call($spy, $spy.data())
+    })
+  })
+
+}(jQuery);
+
+},{}]},{},[1])
+
+
+//# sourceMappingURL=app.js.map
