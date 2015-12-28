@@ -124,8 +124,8 @@ gulp.task('no-debug', ['bower-other'], function() {
 })
 
 // build for production
-gulp.task('compress', ['compress-css', 'compress-js'])
-gulp.task('build', ['no-debug', 'compress'])
+//gulp.task('compress', ['compress-css', 'compress-js'])
+gulp.task('build', ['no-debug', 'css', 'js'])
 
 // default task is build
 gulp.task('default', ['build'])
