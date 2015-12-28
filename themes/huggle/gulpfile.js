@@ -46,7 +46,6 @@ gulp.task('bower-other', function() {
   return gulp.src(mainBowerFiles)
     .pipe(plugins.filter(['*', '!*.js', '!*.css']))
     .pipe(plugins.rename(function(path) {
-      console.log(arguments)
       if (~path.basename.indexOf('glyphicons')) {
         path.dirname += '/fonts'
       }
